@@ -5,7 +5,7 @@ import { Particle } from "./classes/Particle";
 const NUM_LINES = 5;
 
 let lines: Line[] = [];
-let particle;
+let particle: Particle;
 
 new p5((sketch: p5) => {
   sketch.setup = () => {
@@ -30,6 +30,9 @@ new p5((sketch: p5) => {
 
   sketch.draw = () => {
     sketch.background(10);
+
+    particle.draw(sketch);
+    particle.shootRay(90);
 
     for (let line of lines) {
       line.draw(sketch);

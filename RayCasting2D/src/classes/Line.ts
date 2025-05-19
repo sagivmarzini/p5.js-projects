@@ -1,11 +1,10 @@
 import type p5 from "p5";
-import type { Vector } from "p5";
 
 export class Line {
-  a: Vector;
-  b: Vector;
+  a: p5.Vector;
+  b: p5.Vector;
 
-  constructor(from: Vector, to: Vector) {
+  constructor(from: p5.Vector, to: p5.Vector) {
     this.a = from;
     this.b = to;
   }
