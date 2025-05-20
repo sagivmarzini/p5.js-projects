@@ -9,7 +9,8 @@ export class Line {
     this.b = to;
   }
 
-  draw(sketch: p5) {
-    sketch.line(this.a.x, this.a.y, this.b.x, this.b.y);
+  draw(p: p5, color = p.color(255)) {
+    p.stroke(color);
+    p.line(this.a.x, this.a.y, this.b.x, this.b.y);
   }
 }

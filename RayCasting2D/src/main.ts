@@ -2,9 +2,10 @@ import p5 from "p5";
 import { Line } from "./classes/Line";
 import { Particle } from "./classes/Particle";
 
-const NUM_LINES = 5;
+const NUM_WALLS = 5;
+const NUM_RAYS = 10;
 
-let lines: Line[] = [];
+let walls: Line[] = [];
 let particle: Particle;
 
 new p5((sketch: p5) => {
@@ -12,8 +13,8 @@ new p5((sketch: p5) => {
     sketch.createCanvas(window.innerWidth, window.innerHeight);
     sketch.stroke(255);
 
-    for (let i = 0; i < NUM_LINES; i++) {
-      lines[i] = new Line(
+    for (let i = 0; i < NUM_WALLS; i++) {
+      walls[i] = new Line(
         sketch.createVector(
           sketch.random(sketch.width),
           sketch.random(sketch.height)
@@ -26,16 +27,21 @@ new p5((sketch: p5) => {
     }
 
     particle = new Particle(sketch, sketch.width / 2, sketch.height / 2);
+    particle.shootRays(sketch, NUM_RAYS);
   };
 
   sketch.draw = () => {
+    const mousePosition = sketch.createVector(sketch.mouseX, sketch.mouseY);
+
+    particle.goto(mousePosition);
+
     sketch.background(10);
 
     particle.draw(sketch);
-    particle.shootRay(90);
 
-    for (let line of lines) {
-      line.draw(sketch);
+    for (let wall of walls) {
+      wall.draw(sketch);
+      particle.castRays(sketch, wall);
     }
   };
 });
